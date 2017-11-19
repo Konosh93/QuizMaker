@@ -1,0 +1,22 @@
+.problemForm {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#entry(@width: 100%) {
+	width: @width;
+	margin: 0 auto;
+	margin-bottom: 10px;
+
+}
+
+.question {
+	#entry();
+	height: 40px; 
+}
+
+.choices {
+	#entry(70%);
+}
