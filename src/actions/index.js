@@ -155,8 +155,8 @@ export const setQuestionText = (quiz, problem, questionText) => ({
 });
 
 
-export const setChoiceText = (quiz, problem, choice, choiceText) => ({
-  type: SET_CHOICE_TEXT,
+export const editChoiceText = (quiz, problem, choice, choiceText) => ({
+  type: EDIT_CHOICE_TEXT,
   payload: {
     quiz,
     problem,

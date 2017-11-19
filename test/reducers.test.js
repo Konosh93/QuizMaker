@@ -68,7 +68,7 @@ describe('quiz reducer', () => {
   })
 
   /*===============================================================*/
-  it('should set isMyQuiz to true throught the permit edit action', () => {
+  it('should set isMyQuiz to true through the permit edit action', () => {
   	oldState = { ...newState };
     newState = { ...newState, quizes: { ...newState.quizes,
     	'fakeId123KEY1': { ...newState.quizes['fakeId123KEY1'], isMyQuiz: true}}
@@ -153,5 +153,71 @@ describe('quiz reducer', () => {
     expect(quizReducer(oldState, action)).toEqual(newState)
   })
 
+  /*===============================================================*/
+  it('should set text for question in problem 0', () => {
+  	oldState = { ...newState };
+    newState = { ...newState, quizes: { ...newState.quizes,
+    	'fakeId123KEY1': { ...newState.quizes['fakeId123KEY1'], 
+    	  problems: { ...newState.quizes['fakeId123KEY1'].problems,
+    	    0: { ...newState.quizes['fakeId123KEY1'].problems[0], question:
+    	      { ...newState.quizes['fakeId123KEY1'].problems[0].question, text: 'Who founded Amazon?'}}},
+      }
+    }}
+    const action = actions.setQuestionText('fakeId123KEY1', 0, 'Who founded Amazon?');
+    expect(quizReducer(oldState, action)).toEqual(newState)
+  })
+
+  /*===============================================================*/
+  it('should add a new choice to problem 0', () => {
+  	oldState = { ...newState };
+    newState = { ...newState, quizes: { ...newState.quizes,
+    	'fakeId123KEY1': { ...newState.quizes['fakeId123KEY1'], 
+    	  problems: { ...newState.quizes['fakeId123KEY1'].problems,
+    	    0: { ...newState.quizes['fakeId123KEY1'].problems[0], choices:
+    	          { ...newState.quizes['fakeId123KEY1'].problems[0].choices,
+    	            0: { text: null, media: {}}
+    	          }
+    	       }
+    	  },
+        }
+    }}
+    const action = actions.addChoice('fakeId123KEY1', 0);
+    expect(quizReducer(oldState, action)).toEqual(newState)
+  })
+
+
+
+  /*===============================================================*/
+  it('should set the text of choice 0 of problem 0', () => {
+  	oldState = { ...newState };
+    newState = { ...newState, quizes: { ...newState.quizes,
+    	'fakeId123KEY1': { ...newState.quizes['fakeId123KEY1'], 
+    	  problems: { ...newState.quizes['fakeId123KEY1'].problems,
+    	    0: { ...newState.quizes['fakeId123KEY1'].problems[0], choices:
+    	          { ...newState.quizes['fakeId123KEY1'].problems[0].choices, 0:
+    	            { ...newState.quizes['fakeId123KEY1'].problems[0].choices[0], text: 'Jeff Bezos'}
+    	          }
+    	       },
+          }
+       }
+    }}
+    const action = actions.editChoiceText('fakeId123KEY1', 0, 0, 'Jeff Bezos');
+    expect(quizReducer(oldState, action)).toEqual(newState)
+  })
+
+  /*===============================================================*/
+  it('should set the correct choice problem 0', () => {
+  	oldState = { ...newState };
+    newState = { ...newState, quizes: { ...newState.quizes,
+    	'fakeId123KEY1': { ...newState.quizes['fakeId123KEY1'], 
+    	  problems: { ...newState.quizes['fakeId123KEY1'].problems,
+    	    0: { ...newState.quizes['fakeId123KEY1'].problems[0], correct: 0 }
+    	       },
+          }
+       }
+    }
+    const action = actions.setCorrect('fakeId123KEY1', 0, 0);
+    expect(quizReducer(oldState, action)).toEqual(newState)
+  })
 
 });
